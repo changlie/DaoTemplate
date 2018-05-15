@@ -13,7 +13,7 @@ public class ConfigInfo {
 	public static String EntityPackage ;
 	public static String beanTemplate;
 	public static String templateDir ;
-	public static Map<String, String> typeMap = new HashMap<>();
+	public static Map<String, String> typeMap = new HashMap<String, String>();
 	public static boolean isMavenProject = true;
 	
 	

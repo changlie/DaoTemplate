@@ -52,7 +52,7 @@ public abstract class DaoSupport {
 	
 	
 	protected <T> List<T> getEntityList(String sql, Class<T> clazz, Object... args){
-		List<T> list = new ArrayList<>();
+		List<T> list = new ArrayList<T>();
 		Connection connection = null;
 		PreparedStatement prepareStatement = null; 
 		ResultSet resultSet = null;
@@ -89,7 +89,7 @@ public abstract class DaoSupport {
 	
 	@SuppressWarnings("unchecked")
 	protected <T> List<T> getColumnList(String sql, Class<T> clazz, Object... args) {
-		List<T> list = new ArrayList<>();
+		List<T> list = new ArrayList<T>();
 		Connection connection = null;
 		PreparedStatement prepareStatement = null; 
 		ResultSet resultSet = null;
@@ -118,7 +118,7 @@ public abstract class DaoSupport {
 	
 	
 	protected  List<Map<String, Object>> getMapList(String sql, Object... args){
-		List<Map<String, Object>> list = new ArrayList<>();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Connection connection = null;
 		PreparedStatement prepareStatement = null; 
 		ResultSet resultSet = null;
@@ -134,7 +134,7 @@ public abstract class DaoSupport {
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			int columnCount = metaData.getColumnCount();
 			while (resultSet.next()) {
-				Map<String, Object> map = new LinkedHashMap<>();
+				Map<String, Object> map = new LinkedHashMap<String, Object>();
 				for(int i=1; i<=columnCount; i++){
 					String columnName = metaData.getColumnName(i);
 					Object columnValue = resultSet.getObject(i);
@@ -168,7 +168,7 @@ public abstract class DaoSupport {
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			int columnCount = metaData.getColumnCount();
 			while (resultSet.next()) {
-				Map<String, Object> map = new LinkedHashMap<>();
+				Map<String, Object> map = new LinkedHashMap<String, Object>();
 				for(int i=1; i<=columnCount; i++){
 					String columnName = metaData.getColumnName(i);
 					Object columnValue = resultSet.getObject(i);
@@ -183,7 +183,7 @@ public abstract class DaoSupport {
 			close(prepareStatement);
 			close(connection);
 		}
-		return new HashMap<>();
+		return new HashMap<String, Object>();
 	}
 	
 	protected void close(Connection connection){

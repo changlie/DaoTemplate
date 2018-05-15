@@ -1,10 +1,7 @@
 package cn.chenlh.DaoTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import cn.chenlh.index.GenerateBean;
-import cn.chenlh.template.FreeMarkerUtil;
+import cn.chenlh.index.GenerateSql;
 
 /**
  * Hello world!
@@ -19,5 +16,7 @@ public class App {
 //		String geneFileStr = instance.geneFileStr("test.ftl", m);
 //		System.out.println(geneFileStr);
 		new GenerateBean().start();
+		
+		new GenerateSql().getSql("sys_user", "u");
 	}
 }

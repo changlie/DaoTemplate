@@ -32,7 +32,7 @@ public abstract class Generator {
 		
 		boolean hasDate = false;
 		Entity entity = new Entity();
-		List<String> imports = new ArrayList<>();
+		List<String> imports = new ArrayList<String>();
 		entity.setName(className);
 		entity.set_package(ConfigInfo.EntityPackage);
 		entity.setFields(fields);
@@ -45,7 +45,7 @@ public abstract class Generator {
 		}
 		entity.setImports(imports);
 
-		Map<String, Object> root = new HashMap<>();
+		Map<String, Object> root = new HashMap<String, Object>();
 		root.put("bean", entity);
 
 		root.put("tableName", tableName);
