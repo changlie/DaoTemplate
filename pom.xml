@@ -27,8 +27,8 @@
 
 	<scm>
 		<url>https://github.com/changlie/DaoTemplate</url>
-		<connection>https://github.com/changlie/DaoTemplate.git</connection>
-		<developerConnection>http://www.chenlh.cn</developerConnection>
+		<connection>scm:git:git@github.com:changlie/DaoTemplate.git</connection>
+		<developerConnection>scm:git:git@github.com:changlie/DaoTemplate.git</developerConnection>
 	</scm>
 
 	<developers>
