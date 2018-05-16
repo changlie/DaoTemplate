@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import cn.chenlh.template.LogUtil;
+
 
 public class ConfigInfo {
 	public static String DbType ;
@@ -19,13 +21,15 @@ public class ConfigInfo {
 	
 	static{
 		try {
-			System.out.println("config1:"+ConfigInfo.class.getResource("generator-config.properties"));
-			System.out.println("config2:"+ConfigInfo.class.getResource("typeMap.properties"));
-			InputStream is = ConfigInfo.class.getResourceAsStream("generator-config.properties");
-			InputStream is1 = ConfigInfo.class.getResourceAsStream("typeMap.properties");
+			LogUtil.i("config1:"+ConfigInfo.class.getResource("generator-config.properties"));
+			LogUtil.i("config2:"+ConfigInfo.class.getResource("typeMap.properties"));
+			
 			Properties properties = new Properties();
+			InputStream is = ConfigInfo.class.getResourceAsStream("generator-config.properties");
 			properties.load(is);
-			System.out.println(properties.keySet());
+			LogUtil.i("generator-config.propertiesKEYS", properties.keySet());
+			
+			
 			DbType = properties.getProperty("DbType");
 			tableNames = properties.getProperty("tableNames");
 			EntityPackage = properties.getProperty("EntityPackage");
@@ -33,8 +37,9 @@ public class ConfigInfo {
 			beanTemplate= properties.getProperty("bean-template");
 			
 			properties.clear();
+			InputStream is1 = ConfigInfo.class.getResourceAsStream("typeMap.properties");
 			properties.load(is1);
-			System.out.println(properties.keySet());
+			LogUtil.i("typeMap.propertiesKEYS", properties.keySet());
 			
 			Enumeration<Object> keys = properties.keys();
 			while (keys.hasMoreElements()) {
@@ -45,7 +50,7 @@ public class ConfigInfo {
 			}
 		
 		} catch (Exception e) {
-			System.out.println("init jdbc fail!!!");
+			LogUtil.i("加载 generator-config.properties 失败！！");
 			e.printStackTrace();
 		}
 	}

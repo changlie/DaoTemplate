@@ -8,6 +8,7 @@ import java.util.Map;
 
 import cn.chenlh.common.ConfigInfo;
 import cn.chenlh.template.FreeMarkerUtil;
+import cn.chenlh.template.LogUtil;
 
 public class GenerateBean extends Generator {
 
@@ -63,7 +64,7 @@ public class GenerateBean extends Generator {
 		if (!file.exists()) {
 			file.createNewFile();
 		}
-		System.out.println("outFile: "+file.getAbsolutePath());
+		LogUtil.i("outFile: "+file.getAbsolutePath());
 		return file;
 	}
 	

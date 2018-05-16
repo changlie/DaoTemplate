@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cn.chenlh.dao.SqlServerDao;
 import cn.chenlh.template.FreeMarkerUtil;
+import cn.chenlh.template.LogUtil;
 
 public class GenerateSql {
 
@@ -25,7 +26,7 @@ public class GenerateSql {
 		propMap.put("fields", fields);
 		
 		FreeMarkerUtil instance = FreeMarkerUtil.instance();
-		String ret = instance.geneFileStr("sql.ftl", propMap);
-		System.out.println(ret);
+		String ret = instance.geneFileStr("sql", propMap);
+		LogUtil.i(ret);
 	}
 }

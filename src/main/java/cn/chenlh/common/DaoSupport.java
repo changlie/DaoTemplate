@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import cn.chenlh.template.LogUtil;
+
 
 public abstract class DaoSupport {
 
@@ -26,6 +28,8 @@ public abstract class DaoSupport {
 	
 	static{
 		try {
+		LogUtil.i("加载数据库配置.....");
+			
 		InputStream is = DaoSupport.class.getResourceAsStream("generator-config.properties");
 		Properties properties = new Properties();
 		properties.load(is);
@@ -36,6 +40,7 @@ public abstract class DaoSupport {
 		password = properties.getProperty("jdbc.password");
 		
 		} catch (IOException e) {
+			LogUtil.i("加载数据库配置失败！");
 			e.printStackTrace();
 		}
 	}
@@ -45,6 +50,7 @@ public abstract class DaoSupport {
 			Class.forName(driver);
 			return DriverManager.getConnection(url, username, password);
 		} catch (Exception e) {
+			LogUtil.i("连接数据库失败！");
 			e.printStackTrace();
 		}
 		return null;

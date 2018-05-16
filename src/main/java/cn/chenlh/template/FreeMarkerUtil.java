@@ -1,14 +1,21 @@
 package cn.chenlh.template;
 
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.JarURLConnection;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
-
+import cn.chenlh.common.ConfigInfo;
+import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -28,16 +35,113 @@ public class FreeMarkerUtil {
     private FreeMarkerUtil() {
     	try {
 	    	config = new Configuration(new Version("2.3.23"));
-	    	config.setDirectoryForTemplateLoading(new File(getTemplateDir()));
+	    	StringTemplateLoader templateLoader = getTemplateLoader();
+	    	config.setTemplateLoader(templateLoader);
+	    	
+//	    	config.setDirectoryForTemplateLoading(new File(getTemplateDir()));
     	} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
     
-    public static String getTemplateDir() {
+    private StringTemplateLoader getTemplateLoader() {
+    	StringTemplateLoader templateLoader = new StringTemplateLoader();
+    	
+    	String customPath = ConfigInfo.templateDir;
+    	scanAndLoadTemplate(templateLoader, customPath);
+    	
+    	return templateLoader;
+	}
+
+	private void scanAndLoadTemplate(StringTemplateLoader templateLoader, String customPath) {
+		try {
+    		URL url = getClass().getClassLoader().getResource(customPath);
+    		JarURLConnection jarURLConnection  = (JarURLConnection )url.openConnection();
+    		JarFile jarFile = jarURLConnection.getJarFile();
+    		Enumeration<JarEntry> entries = jarFile.entries();
+    		
+    		while (entries.hasMoreElements()) {
+				JarEntry jarEntry = (JarEntry) entries.nextElement();
+				String name = jarEntry.getName();
+				if(name.contains(customPath) && !name.equals(customPath+"/") && name.endsWith(".ftl")) {
+					int start = name.lastIndexOf("/")+1;
+					int endIndex = name.lastIndexOf('.');
+					String templateKey = name.substring(start, endIndex);
+					
+					System.out.println("加载模板： "+templateKey+"=>"+name);
+					System.out.println("resource: "+getClass().getResource("/"+name));
+					
+					String templateSource = getTemplateSource("/"+name);
+			    	templateLoader.putTemplate(templateKey, templateSource);
+				}
+			}
+    		
+		} catch (IOException e) {
+			System.out.println("遍历  加载  template 文件失败！");
+			e.printStackTrace();
+		}
+	}
+
+	private String getTemplateSource(String templateFileName) {
+    	InputStream inputStream = null;
+    	BufferedReader reader = null; 
+    	StringBuilder sb = new StringBuilder(); 
+    	try {
+    		inputStream = getClass().getResourceAsStream(templateFileName);
+    		reader = new BufferedReader(new InputStreamReader(inputStream));
+    		String line = null;
+    		while ((line = reader.readLine()) != null) {
+    			sb.append(line);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(" templateFile "+templateFileName+" 获取失败！ ");
+		}finally {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println(" 获取 templateFile "+templateFileName+" 关闭流失败！ ");
+			}
+		}
+    	return sb.toString();
+	}
+    
+    public String test(String templateName, Map<String, Object> props) {
+    	StringWriter out = new StringWriter();
+    	Template template = null;
+    	try {
+			template = config.getTemplate(templateName);
+		} catch (Exception e) {
+			System.out.println("获取  模板："+templateName+"失败！");
+			e.printStackTrace();
+		}
+    	try {
+			template.process(props, out);
+			out.flush();
+			System.out.println(out.getBuffer().toString());
+			return out.getBuffer().toString();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+    	return "nothing";
+    }
+
+	public static String getTemplateDir() {
     	if(templateDir==null) {
-    		URL url = FreeMarkerUtil.class.getResource("");
-    		templateDir = url.getPath();
+    		URL url = FreeMarkerUtil.class.getResource("/cn/chenlh/template");
+    		String path = url.getPath();
+    		templateDir = path.substring(path.indexOf("!/")+2);
+    		
+    		System.out.println("template path: "+path);
     	}
     	System.out.println("template dir: "+templateDir);
 		return templateDir;

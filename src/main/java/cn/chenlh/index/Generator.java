@@ -9,6 +9,7 @@ import cn.chenlh.bean.Entity;
 import cn.chenlh.bean.Field;
 import cn.chenlh.common.ConfigInfo;
 import cn.chenlh.dao.SqlServerDao;
+import cn.chenlh.template.LogUtil;
 
 public abstract class Generator {
 	
@@ -58,6 +59,6 @@ public abstract class Generator {
 		long start = System.currentTimeMillis();
 		generate();
 		long end = System.currentTimeMillis();
-		System.out.println("total spend: " + (end - start) + "ms, finish!");
+		LogUtil.i("total spend: " + (end - start) + "ms, finish!");
 	}
 }
