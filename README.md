@@ -4,8 +4,8 @@
 支持：当前只支持sqlserver
 
 功能：
-生成sql
-生成 实体类
+1. 生成sql
+2. 生成 实体类
 
 ```xml
 <dependency>
