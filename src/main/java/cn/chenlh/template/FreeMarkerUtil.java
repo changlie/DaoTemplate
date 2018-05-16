@@ -13,13 +13,9 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.Version;
-
 /**
  * 
- * <b>
- *    FreeMarkerUtil
- * </b>
- * @author kangxu
+ * @author changlie
  *
  */
 public class FreeMarkerUtil {
@@ -49,7 +45,7 @@ public class FreeMarkerUtil {
     
     /**
      * instance FreeMarkerUtil
-     * @return
+     * @return FreeMarkerUtil or null
      */
     public static FreeMarkerUtil instance() {
         if (instance == null) {
@@ -61,10 +57,9 @@ public class FreeMarkerUtil {
     
     /**
      * 通过模板文件生成字符串
-     * @param request
-     * @param templateFileName
-     * @param propMap
-     * @return
+     * @param templateFileName 模板文件名
+     * @param propMap 数据源
+     * @return format string
      */
     public String geneFileStr(String templateFileName, Map<String, Object> propMap) {
         StringWriter out = new StringWriter();

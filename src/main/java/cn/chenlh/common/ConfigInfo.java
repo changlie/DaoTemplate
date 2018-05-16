@@ -19,6 +19,8 @@ public class ConfigInfo {
 	
 	static{
 		try {
+			System.out.println("config1:"+ConfigInfo.class.getResource("generator-config.properties"));
+			System.out.println("config2:"+ConfigInfo.class.getResource("typeMap.properties"));
 			InputStream is = ConfigInfo.class.getResourceAsStream("generator-config.properties");
 			InputStream is1 = ConfigInfo.class.getResourceAsStream("typeMap.properties");
 			Properties properties = new Properties();
@@ -43,6 +45,7 @@ public class ConfigInfo {
 			}
 		
 		} catch (Exception e) {
+			System.out.println("init jdbc fail!!!");
 			e.printStackTrace();
 		}
 	}
