@@ -1,7 +1,5 @@
 package cn.chenlh.dao;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +12,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import cn.chenlh.common.ConfigInfo;
 import cn.chenlh.common.LogUtil;
