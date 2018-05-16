@@ -33,6 +33,7 @@ public class App {
 //		new GenerateBean().start();
 		
 		new GenerateSql().getSql("sys_user", "u");
+		new GenerateSql().getSql("sys_user");
 		
 		System.out.println(ConfigInfo.beanTemplate);
 		System.out.println(ConfigInfo.tableNames);

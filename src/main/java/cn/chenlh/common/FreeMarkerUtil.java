@@ -65,17 +65,19 @@ public class FreeMarkerUtil {
 					int start = name.lastIndexOf("/")+1;
 					int endIndex = name.lastIndexOf('.');
 					String templateKey = name.substring(start, endIndex);
+					String templateKeyWithSuffix = name.substring(start);
 					
-					System.out.println("加载模板： "+templateKey+"=>"+name);
-					System.out.println("resource: "+getClass().getResource("/"+name));
+					LogUtil.i("加载模板： "+templateKey+"=>"+name);
+					LogUtil.i("模板resource: "+getClass().getResource("/"+name));
 					
 					String templateSource = getTemplateSource("/"+name);
 			    	templateLoader.putTemplate(templateKey, templateSource);
+			    	templateLoader.putTemplate(templateKeyWithSuffix, templateSource);
 				}
 			}
     		
 		} catch (IOException e) {
-			System.out.println("遍历  加载  template 文件失败！");
+			LogUtil.i("遍历  加载  template 文件失败！");
 			e.printStackTrace();
 		}
 	}
@@ -89,17 +91,17 @@ public class FreeMarkerUtil {
     		reader = new BufferedReader(new InputStreamReader(inputStream));
     		String line = null;
     		while ((line = reader.readLine()) != null) {
-    			sb.append(line);
+    			sb.append(line).append("\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(" templateFile "+templateFileName+" 获取失败！ ");
+			LogUtil.i(" templateFile "+templateFileName+" 获取失败！ ");
 		}finally {
 			try {
 				reader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println(" 获取 templateFile "+templateFileName+" 关闭流失败！ ");
+				LogUtil.i(" 获取 templateFile "+templateFileName+" 关闭流失败！ ");
 			}
 		}
     	return sb.toString();
@@ -111,7 +113,7 @@ public class FreeMarkerUtil {
     	try {
 			template = config.getTemplate(templateName);
 		} catch (Exception e) {
-			System.out.println("获取  模板："+templateName+"失败！");
+			LogUtil.i("获取  模板："+templateName+"失败！");
 			e.printStackTrace();
 		}
     	try {
@@ -173,8 +175,10 @@ public class FreeMarkerUtil {
         return out.getBuffer().toString();
     }
     
-    public void generateFile(String templateFileName, Map<String, Object> propMap, Writer out) {
-        Template tmp;
+    
+
+	public void generateFile(String templateFileName, Map<String, Object> propMap, Writer out) {
+		Template tmp;
         try {
             tmp = this.config.getTemplate(templateFileName,"UTF-8");
             tmp.process(propMap, out);
@@ -192,6 +196,5 @@ public class FreeMarkerUtil {
 			}
 		}
     }
-    
-
+	
 }

@@ -4,7 +4,7 @@
 
 	<groupId>cn.chenlh</groupId>
 	<artifactId>daoUtil</artifactId>
-	<version>2.0.3</version>
+	<version>2.0.8</version>
 	<packaging>jar</packaging>
 
 	<name>${project.groupId}:${project.artifactId}</name>
