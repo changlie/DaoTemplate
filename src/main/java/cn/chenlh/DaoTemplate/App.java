@@ -6,6 +6,7 @@ import java.util.Map;
 import cn.chenlh.common.ConfigInfo;
 import cn.chenlh.index.GenerateSql;
 import cn.chenlh.template.FreeMarkerUtil;
+import cn.chenlh.template.LogUtil;
 
 /**
  * Hello world!
@@ -14,8 +15,8 @@ import cn.chenlh.template.FreeMarkerUtil;
 public class App {
 	
 	static {
+		LogUtil.isDebug = true;
 		ConfigInfo.beanTemplate = "abcdddd";
-		
 	}
 	
 	public static void main(String[] args) {

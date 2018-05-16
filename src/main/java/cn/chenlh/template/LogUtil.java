@@ -2,7 +2,7 @@ package cn.chenlh.template;
 
 public abstract class LogUtil {
 
-	private static boolean isDebug = false;
+	public static boolean isDebug = false;
 
 	public static void i(Object... msgs) {
 		if (!isDebug) {
