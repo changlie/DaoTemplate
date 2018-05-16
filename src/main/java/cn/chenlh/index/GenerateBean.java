@@ -7,8 +7,8 @@ import java.io.Writer;
 import java.util.Map;
 
 import cn.chenlh.common.ConfigInfo;
-import cn.chenlh.template.FreeMarkerUtil;
-import cn.chenlh.template.LogUtil;
+import cn.chenlh.common.FreeMarkerUtil;
+import cn.chenlh.common.LogUtil;
 
 public class GenerateBean extends Generator {
 

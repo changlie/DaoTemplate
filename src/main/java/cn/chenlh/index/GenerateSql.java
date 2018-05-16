@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.chenlh.common.FreeMarkerUtil;
 import cn.chenlh.dao.SqlServerDao;
-import cn.chenlh.template.FreeMarkerUtil;
 
 public class GenerateSql {
 

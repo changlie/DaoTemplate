@@ -3,7 +3,6 @@ package cn.chenlh.dao;
 import java.util.List;
 
 import cn.chenlh.bean.Field;
-import cn.chenlh.common.DaoSupport;
 
 public class SqlServerDao extends DaoSupport {
 

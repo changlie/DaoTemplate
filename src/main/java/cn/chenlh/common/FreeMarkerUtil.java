@@ -1,4 +1,4 @@
-package cn.chenlh.template;
+package cn.chenlh.common;
 
 
 import java.io.BufferedReader;
@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import cn.chenlh.common.ConfigInfo;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -29,7 +28,6 @@ public class FreeMarkerUtil {
     
     private static FreeMarkerUtil instance;
     private Configuration config;
-    public static String templateDir = null;
     
     
     private FreeMarkerUtil() {
@@ -135,17 +133,6 @@ public class FreeMarkerUtil {
     	return "nothing";
     }
 
-	public static String getTemplateDir() {
-    	if(templateDir==null) {
-    		URL url = FreeMarkerUtil.class.getResource("/cn/chenlh/template");
-    		String path = url.getPath();
-    		templateDir = path.substring(path.indexOf("!/")+2);
-    		
-    		System.out.println("template path: "+path);
-    	}
-    	System.out.println("template dir: "+templateDir);
-		return templateDir;
-	}
     
     /**
      * instance FreeMarkerUtil

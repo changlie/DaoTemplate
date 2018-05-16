@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.chenlh.common.ConfigInfo;
+import cn.chenlh.common.FreeMarkerUtil;
+import cn.chenlh.common.LogUtil;
 import cn.chenlh.index.GenerateSql;
-import cn.chenlh.template.FreeMarkerUtil;
-import cn.chenlh.template.LogUtil;
 
 /**
  * Hello world!
@@ -15,8 +15,11 @@ import cn.chenlh.template.LogUtil;
 public class App {
 	
 	static {
+		
 		LogUtil.isDebug = true;
+		System.out.println("start 自定义配置!");
 		ConfigInfo.beanTemplate = "abcdddd";
+		System.out.println("end 自定义配置!");
 	}
 	
 	public static void main(String[] args) {

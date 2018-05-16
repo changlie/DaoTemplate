@@ -1,4 +1,4 @@
-package cn.chenlh.template;
+package cn.chenlh.common;
 
 public abstract class LogUtil {
 
