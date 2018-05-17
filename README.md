@@ -1,4 +1,4 @@
-# DaoTemplate
+# DaoUtil
 持久化小工具
 
 支持：当前只支持sqlserver
